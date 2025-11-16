@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata xmlns="http://www.ion.org/standards/sdrwg/schema/metadata.xsd">
+   <comment format="text">IQ sample batch obtained during the LuGRE mission. Timestamp in GPS time - 18 s. Endianness: Little, Encoding: Two's complement. Intermediate frequency: baseband.</comment>
+   <lane id="Lane">
+      <system id="System"/>
+      <bandsrc idband="L1" idsrc="Source"/>
+      <block id="Block00">
+         <chunk id="Chunk00">
+            <sizeword>1</sizeword>
+            <countwords>1</countwords>
+            <endian>Little</endian>
+            <padding>None</padding>
+            <wordshift>Right</wordshift>
+            <lump id="Lump00">
+               <shift>Right</shift>
+               <stream id="Stream00">
+                  <ratefactor>1</ratefactor>
+                  <quantization>4</quantization>
+                  <packedbits>8</packedbits>
+                  <alignment>Undefined</alignment>
+                  <shift>Undefined</shift>
+                  <format>IQ</format>
+                  <encoding>TC</encoding>
+                  <band id="L1"/>
+               </stream>
+            </lump>
+         </chunk>
+         <cycles>0</cycles>
+         <sizeheader>62</sizeheader>
+         <sizefooter>3</sizefooter>
+      </block>
+   </lane>
+   <session id="Session">
+      <toa>2025-03-14T10:09:45.209Z</toa>
+      <system id="System"/>
+      <campaign>LuGRE</campaign>
+      <scenario>Surface</scenario>
+   </session>
+   <system id="System">
+      <cluster id="Cluster"/>
+      <source id="Source">
+         <polarization>RHCP</polarization>
+      </source>
+      <freqbase format="MHz">8</freqbase>
+      <equipment>Qascom QN400-SPACE</equipment>
+   </system>
+   <band id="L1">
+      <centerfreq format="MHz">1575.420</centerfreq>
+      <translatedfreq format="MHz">0</translatedfreq>
+      <inverted>false</inverted>
+      <delaybias format="sec">0.000e+000</delaybias>
+   </band>
+   <band id="L5">
+      <centerfreq format="MHz">1176.450</centerfreq>
+      <translatedfreq format="MHz">0</translatedfreq>
+      <inverted>false</inverted>
+      <delaybias format="sec">0.000e+000</delaybias>
+   </band>
+   <file id="File">
+      <url>IQS_L1_20250314_100945_2000MS_S_OP73_0.bin</url>
+      <timestamp>2025-03-14T10:09:45.209Z</timestamp>
+      <lane id="Lane"/>
+   </file>
+</metadata>
