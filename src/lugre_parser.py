@@ -95,15 +95,15 @@ def lugre_parser(path: Path, set_id: str) -> dict[str, pd.DataFrame]:
     lugre_df = {"info": info_df, "acq": acq_df, "nav": nav_df, "eph": eph_df, "clk": clk_df, "raw": raw_df}
     return lugre_df
 
-def get_unique_times(lugre_df: pd.DataFrame, minmax: bool = True) -> np.ndarray:
+def get_unique_times(lugre_df: pd.DataFrame) -> np.ndarray:
     """
     Get all unique timestamps for all subfiles from LuGRE DataFrame.
     Args:
         lugre_df (pd.DataFrame): Dictionary of DataFrames containing LuGRE data.
-        minmax (bool): If True, also return earliest and latest timestamps with source info.
+        minmax (bool): If True, also 
     Returns:
-        np.ndarray: Array of unique timestamps. If minmax is True, also returns
-                    tuples with earliest and latest timestamps and their sources.
+        Array of unique timestamps, and tuples with earliest and latest timestamps and their sources.
+                    
     """
     # get earliest and latest time of dataset
     time_keys = ['rxTime', 'Receiver Time [s]']
@@ -126,10 +126,7 @@ def get_unique_times(lugre_df: pd.DataFrame, minmax: bool = True) -> np.ndarray:
 
     rxTimes = np.sort(np.unique(rxTimes))
 
-    if minmax:
-        return rxTimes, (rxTime_start, src_min), (rxTime_end, src_max)
-    else:
-        return rxTimes
+    return rxTimes, (rxTime_start, src_min), (rxTime_end, src_max)
     
 def gps_seconds_to_gps_weeks(gps_seconds: float) -> tuple[int, float]:
     """
