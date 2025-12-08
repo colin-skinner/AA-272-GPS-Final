@@ -313,21 +313,34 @@ def moon_sat_vec(moon_ecef_m: np.ndarray,
     center_angles = np.linspace(0, max_angle, num_radial + 1)[1:]
     az_angles = np.linspace(0, 2*np.pi, num_angular + 1)[:-1]
 
+    print("norm(r) =", norm(r))
+    print("h_vec norm =", norm(h_vec))
+    print("v_vec norm =", norm(v_vec))
+
+    # Check orthogonality
+    print("dot(r,h) =", np.dot(unit(r), h_vec))
+    print("dot(r,v) =", np.dot(unit(r), v_vec))
+    print("dot(h,v) =", np.dot(h_vec, v_vec))
 
     sat_vecs = [moon_ecef_m + rho * unit(r)] # center satellite
+    alts = np.linalg.norm(sat_vecs - moon_ecef_m, axis=1) - np.linalg.norm(r)
+    print(f"ALTS: {alts}")
     for az in az_angles:
         for center_angle in center_angles:
-            sat_vecs.append(
-                moon_ecef_m +
-                rho * (
-                    np.cos(center_angle) * unit(r) +
-                    np.sin(center_angle) * (np.cos(az) * h_vec + np.sin(az) * v_vec)
+            direction = (
+                np.cos(center_angle) * unit(r) +
+                np.sin(center_angle) * (
+                    np.cos(az) * h_vec +
+                    np.sin(az) * v_vec
                 )
             )
+            direction = direction / np.linalg.norm(direction)
+
+            sat_vecs.append(moon_ecef_m + rho * direction)
 
     sat_vecs = np.array(sat_vecs)
 
-    print(f"Calculated {len(sat_vecs)} satellites")
+    print(f"Calculated {len(sat_vecs)} satellites!")
 
     return sat_vecs
 
